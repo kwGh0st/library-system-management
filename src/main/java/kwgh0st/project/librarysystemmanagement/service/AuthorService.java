@@ -1,6 +1,7 @@
 package kwgh0st.project.librarysystemmanagement.service;
 
 import kwgh0st.project.librarysystemmanagement.model.Author;
+import kwgh0st.project.librarysystemmanagement.model.dto.AuthorDTO;
 import kwgh0st.project.librarysystemmanagement.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ public class AuthorService {
     private final AuthorRepository authorRepository;
 
     @Autowired
-
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
@@ -32,4 +32,13 @@ public class AuthorService {
     public void deleteAuthor(Long id) {
         authorRepository.deleteById(id);
     }
+    public AuthorDTO convertToDTO(Author author) {
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setId(author.getId());
+        authorDTO.setFirstName(author.getFirstName());
+        authorDTO.setLastName(author.getLastName());
+        authorDTO.setBooks(author.getBooks());
+        return authorDTO;
+    }
+
 }

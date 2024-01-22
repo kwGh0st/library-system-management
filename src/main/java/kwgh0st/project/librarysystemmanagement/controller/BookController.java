@@ -1,11 +1,13 @@
 package kwgh0st.project.librarysystemmanagement.controller;
 
 import kwgh0st.project.librarysystemmanagement.model.Book;
+import kwgh0st.project.librarysystemmanagement.model.dto.BookDTO;
 import kwgh0st.project.librarysystemmanagement.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/books")
@@ -18,13 +20,15 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.findAllBooks();
+    public List<BookDTO> getAllBooks() {
+        return bookService.findAllBooks().stream()
+                .map(bookService::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable Long id) {
-        return bookService.findBookById(id);
+    public BookDTO getBookById(@PathVariable Long id) {
+        return bookService.convertToDTO(bookService.findBookById(id));
     }
 
     @PostMapping

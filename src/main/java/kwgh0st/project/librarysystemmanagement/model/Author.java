@@ -1,5 +1,6 @@
 package kwgh0st.project.librarysystemmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Author {
     private String firstName;
     private String lastName;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "author")
     private Set<Book> books;
 

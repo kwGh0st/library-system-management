@@ -11,5 +11,6 @@ public class BookDTO {
     private String isbn;
     private String authorFirstName;
     private String authorLastName;
+    private String description;
 }
 
