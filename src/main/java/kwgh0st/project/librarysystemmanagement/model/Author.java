@@ -14,11 +14,14 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "author")
+    @Column(nullable = false)
     private Set<Book> books;
 
 }
